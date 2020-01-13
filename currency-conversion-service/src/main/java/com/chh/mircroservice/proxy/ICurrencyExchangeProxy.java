@@ -9,11 +9,13 @@ import com.chh.mircroservice.entity.CurrencyConversion;
 
 
 //@FeignClient(name="currency-exchange-service",url = "localhost:8000") // when we use the Ribbon client we no need to use feign cleint
-@FeignClient(name="currency-exchange-service") //here currency-exchange-service is application name of another microservice 
+//@FeignClient(name="currency-exchange-service") //here currency-exchange-service is application name of another microservice 
+@FeignClient(name="netflix-zuul-api-gateway-server")//after introducing zuul api 
 @RibbonClient(name="currency-exchange-service")
 public interface ICurrencyExchangeProxy {
 	
-	@GetMapping("/currency-exchange/from/{from}/to/{to}")
+//	@GetMapping("/currency-exchange/from/{from}/to/{to}")
+	@GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")
 	public CurrencyConversion retriveValue(@PathVariable String from,@PathVariable String to);
 
 }
